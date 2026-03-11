@@ -36,4 +36,50 @@ class ParfumController extends Controller
             "data"    => $validated
         ], 201);
     }
+
+    // GET /api/parfums
+    public function index()
+    {
+        // Data dummy koleksi parfum di toko kamu
+        $parfums = [
+            [
+                "kode_parfum" => "PRF-001",
+                "nama_parfum" => "Ocean Breeze",
+                "brand"       => "Malang Fragrance",
+                "harga"       => 150000,
+                "stok"        => 25,
+                "notes"       => [
+                    "Sea Salt", "Bergamot", "Sage"
+                ]
+            ],
+            [
+                "kode_parfum" => "PRF-002",
+                "nama_parfum" => "Midnight Oud",
+                "brand"       => "Brawijaya Scents",
+                "harga"       => 350000,
+                "stok"        => 10,
+                "notes"       => [
+                    "Oud", "Saffron", "Leather", "Rose"
+                ]
+            ],
+            [
+                "kode_parfum" => "PRF-003",
+                "nama_parfum" => "Vanilla Sky",
+                "brand"       => "Ub Fragrance",
+                "harga"       => 125000,
+                "stok"        => 50,
+                "notes"       => [
+                    "Vanilla Bean", "Whipped Cream", "Coconut"
+                ]
+            ]
+        ];
+
+        // Mengembalikan respons dalam format JSON
+        // Status code defaultnya 200 (OK)
+        return response()->json([
+            "status" => "success",
+            "message" => "List data parfum berhasil diambil",
+            "data" => $parfums
+        ]);
+    }
 }

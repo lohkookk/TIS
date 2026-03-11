@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ParfumController;
 
 Route::post('/Parfum', [ParfumController::class, 'store']);
+Route::get('/parfums', [ParfumController::class, 'index']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
