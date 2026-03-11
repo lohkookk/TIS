@@ -82,4 +82,50 @@ class ParfumController extends Controller
             "data" => $parfums
         ]);
     }
+
+    // PUT /api/parfums/{kode}
+public function update(Request $request, $kode)
+{
+    // 1. Simulasi mencari data berdasarkan kode_parfum
+    // (Nanti kalau sudah pakai DB, pakainya Parfum::where('kode_parfum', $kode)->first())
+    
+    try {
+        // 2. Validasi data baru yang dikirim user
+        $validated = $request->validate([
+            'nama_parfum' => 'required|string|max:100',
+            'brand'       => 'required|string|max:50',
+            'harga'       => 'required|numeric|min:1000',
+            'stok'        => 'required|integer|min:0',
+            'notes'       => 'required|array',
+            'notes.*'     => 'required|string|max:30',
+        ]);
+
+        // 3. Respon Sukses (Dummy)
+        return response()->json([
+            "message" => "Data parfum dengan kode $kode berhasil diupdate (Dummy)",
+            "data_sebelumnya" => [
+                "kode_parfum" => $kode,
+                "nama_parfum" => "Data Lama"
+            ],
+            "data_terbaru" => $validated
+        ], 200);
+
+    } catch (\Illuminate\Validation\ValidationException $th) {
+        return response()->json([
+            "message" => "Update gagal, validasi tidak terpenuhi",
+            "errors" => $th->validator->errors()
+        ], 422);
+    }
+}
+    // DELETE /api/parfums/{kode}
+public function destroy($kode)
+{
+    // 1. Simulasi mencari data (logika aslinya nanti: Parfum::where('kode_parfum', $kode)->delete())
+    
+    // 2. Berikan respon sukses
+    return response()->json([
+        "message" => "Parfum dengan kode $kode berhasil dihapus dari sistem (Dummy)",
+        "status"  => "success"
+    ], 200);
+}
 }

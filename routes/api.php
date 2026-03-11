@@ -4,8 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ParfumController;
 
-Route::post('/Parfum', [ParfumController::class, 'store']);
+Route::post('/parfum', [ParfumController::class, 'store']);
 Route::get('/parfums', [ParfumController::class, 'index']);
+Route::put('/parfums/{kode}', [ParfumController::class, 'update']);
+Route::patch('/parfums/{kode}', [ParfumController::class, 'update']);
+Route::delete('/parfums/{kode}', [ParfumController::class, 'destroy']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
